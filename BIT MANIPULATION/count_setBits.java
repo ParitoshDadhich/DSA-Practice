@@ -26,3 +26,16 @@ class Solution {
         return count;
     }
 }
+
+// method 3
+// Time: O(number of set bits)
+class Solution {
+    static int setBits(int n) {
+        int count = 0;
+        while(n != 0){
+            n = n - (n&(-n));
+            count++;
+        }
+        return count;
+    }
+}
