@@ -22,8 +22,37 @@ class Solution
     }
 }
 
-
 // Recursive approach
+class Solution
+{
+    //Function to sort the array using bubble sort algorithm.
+	public static void bubbleSort(int arr[], int n)
+    {
+        if(n == 0) return;
+        
+        bubbleSortPass(arr, n-1, 0);
+        
+        bubbleSort(arr, n-1);
+    }
+    
+    static void bubbleSortPass(int arr[], int n, int sI){
+        if(sI == n) return;
+        
+        if(arr[sI] > arr[sI+1]){
+            swap(arr, sI, sI+1);
+        }
+        
+        bubbleSortPass(arr, n, sI+1);
+    }
+    
+    static void swap(int arr[], int i, int j){
+        int temp = arr[i];
+        arr[i] = arr[j];
+        arr[j] = temp;
+    }
+}
+
+// Recursive approach -> Pattern
 class Solution
 {
     //Function to sort the array using bubble sort algorithm.
