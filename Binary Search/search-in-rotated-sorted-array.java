@@ -1,3 +1,5 @@
+// Iterative solution
+
 class Solution {
     public int search(int[] nums, int target) {
         /*
@@ -57,5 +59,40 @@ class Solution {
         }
 
         return -1;
+    }
+}
+
+
+// Recursive solution
+class Solution {
+    public int search(int[] nums, int target) {
+        return helper(nums, target, 0, nums.length-1);
+    }
+
+    private int helper(int nums[], int target, int sI, int eI){
+        if(sI > eI)
+            return -1;
+        
+        int mid = sI + (eI-sI)/2;
+
+        if(nums[mid] == target){
+            return mid;
+        }
+
+        // Check if the left subarray is sorted
+        else if(nums[sI] < nums[mid]){
+            if(nums[sI] <= target && target <= nums[mid])    // Search in the left subarray
+                return helper(nums, target, sI, mid-1);
+            else                                            // Search in the right subarray
+                return helper(nums, target, mid+1, eI);
+        }
+
+        // Check if the right subarray is sorted
+        else{
+            if(mid+1 <= eI && nums[mid+1] <= target && target <= nums[eI])  // Search in the right subarray
+                return helper(nums, target, mid+1, eI);
+            else                                                            // Search in the left subarray
+                return helper(nums, target, sI, mid-1);
+        }
     }
 }
