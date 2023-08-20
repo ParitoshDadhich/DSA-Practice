@@ -9,8 +9,15 @@ class Solution {
         // finding pivot element
         int sI=0, eI=nums.length-1;
         int pivotIndex = findPivot(nums);
+        
+        // when array is alreay sorted
+        if(pivotIndex == -1)
+            return binarySearch(nums, 0, eI, target);
 
-        int leftHalf = binarySearch(nums, sI, pivotIndex, target);
+        // if my target element is the pivot element
+        if(nums[pivotIndex] == target)
+            return pivotIndex;
+        int leftHalf = binarySearch(nums, sI, pivotIndex-1, target);
         if(leftHalf == -1)
             return binarySearch(nums, pivotIndex+1, eI, target);
         
