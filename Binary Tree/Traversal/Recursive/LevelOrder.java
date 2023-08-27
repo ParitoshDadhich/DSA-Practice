@@ -5,7 +5,7 @@
 - Time complexity: O(n)
 <!-- Add your time complexity here, e.g. $$O(n)$$ -->
 
-- Space complexity: O(n)
+- Space complexity: O(h), h is the height of the tree
 <!-- Add your space complexity here, e.g. $$O(n)$$ -->
 
 # Code
