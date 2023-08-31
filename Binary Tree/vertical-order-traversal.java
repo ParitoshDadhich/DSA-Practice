@@ -52,3 +52,45 @@ class Solution {
         return ans;
     }
 }
+
+// DFS -> solution
+
+class Solution
+{
+    //Function to find the vertical order traversal of Binary Tree.
+    static TreeMap<Integer, TreeMap<Integer, PriorityQueue<Integer>>> map;
+    public List<List<Integer>> verticalTraversal(TreeNode root) 
+    {
+        map = new TreeMap<>();
+        helper(root, 0, 0);
+        
+        List<List<Integer>> ans = new ArrayList<>();
+        for(Map<Integer, PriorityQueue<Integer>> levelItr: map.values()){
+            List<Integer> list = new ArrayList<>();
+            for(PriorityQueue<Integer> nodes: levelItr.values()){
+                while(!nodes.isEmpty())
+                    list.add(nodes.poll());
+            }
+            ans.add(list);
+        }
+        
+        return ans;
+    }
+    
+    void helper(TreeNode root, int ver, int lev){
+        if(root == null)
+            return;
+        
+        if(!map.containsKey(ver))
+            map.put(ver, new TreeMap<>());
+        if(!map.get(ver).containsKey(lev))
+            map.get(ver).put(lev, new PriorityQueue<>());
+        
+        map.get(ver).get(lev).add(root.val);
+        
+        helper(root.left, ver-1, lev+1);
+        helper(root.right, ver+1, lev+1);
+        
+        return;
+    }
+}
