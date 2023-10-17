@@ -48,3 +48,43 @@ class Solution {
         return 1 + Math.max(height(root.left), height(root.right));
     }
 }
+
+
+// method 3 -> using pair class
+// time -> o(n)
+// space -> o(h)
+ 
+
+class Solution {
+    
+    static class Pair{
+        int height;
+        boolean balance;
+    }
+    
+    
+	public boolean isBalanced(TreeNode root) {
+        return helper(root).balance;
+    }
+    
+	private Pair helper(TreeNode root) {
+        if(root == null){
+            Pair ans = new Pair();
+            ans.height = 0;
+            ans.balance = true;
+            
+            return ans;
+        }
+        
+        Pair ans = new Pair();
+        
+        Pair temp1 = helper(root.left);
+        Pair temp2 = helper(root.right);
+        
+        ans.height = Math.max(temp1.height, temp2.height) + 1;
+        ans.balance = ( Math.abs(temp1.height - temp2.height) > 1 || temp1.balance == false || temp2.balance == false) ? false : true;
+        
+        return ans;
+        
+    }
+}
